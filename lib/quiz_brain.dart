@@ -1,6 +1,8 @@
 import 'package:quiz_app/question.dart';
 
 class QuizBrain {
+  int _questionNumber = 0;
+
   List<Question> _questionBank = [
     Question(q: 'You are superhero', a: false),
     Question(q: 'you dont sleep', a: false),
@@ -16,11 +18,19 @@ class QuizBrain {
     Question(q: 'you areadfg cool', a: true),
   ];
 
-  String getQuestionText(int questionNumber) {
-    return _questionBank[questionNumber].questionText;
+  void nextQuestion() {
+    if (_questionNumber < _questionBank.length - 1) {
+      _questionNumber++;
+    }
+    print(_questionNumber);
+    print(_questionBank.length);
   }
 
-  bool getCorrectAnswer(int questionNumber) {
-    return _questionBank[questionNumber].questionAnswer;
+  String getQuestionText() {
+    return _questionBank[_questionNumber].questionText;
+  }
+
+  bool getCorrectAnswer() {
+    return _questionBank[_questionNumber].questionAnswer;
   }
 }

@@ -34,6 +34,32 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Widget> scoreKeeper = [];
 
+  void checkAnswer(bool userPickedAnswer) {
+    bool correctAnswer = quizBrain.getCorrectAnswer();
+
+    setState(
+      () {
+        if (userPickedAnswer == correctAnswer) {
+          scoreKeeper.add(
+            Icon(
+              Icons.check,
+              color: Colors.green,
+            ),
+          );
+        } else {
+          scoreKeeper.add(
+            Icon( 
+              Icons.close,
+              color: Colors.red,
+            ),
+          );
+        }
+
+        quizBrain.nextQuestion();
+      },
+    );
+  }
+
   // List<String> questions = [
   //   'You are superhero',
   //   'you dont sleep',
@@ -42,7 +68,7 @@ class _QuizPageState extends State<QuizPage> {
   // List<bool> answers = [false, false, true];
   // Question q1 = Question(q: "I am a coder", a: false);
 
-  int questionNumber = 0;
+  // int questionNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +82,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.getQuestionText(questionNumber),
+                quizBrain.getQuestionText(),
                 style: TextStyle(
                   fontSize: 25,
                   color: Colors.white,
@@ -74,16 +100,7 @@ class _QuizPageState extends State<QuizPage> {
                 // textStyle: TextStyle(color: Colors.white),
               ),
               onPressed: () {
-                bool correctAnswer = quizBrain.getCorrectAnswer(questionNumber);
-                // quizBrain.questionBank[questionNumber].questionAnswer = true;
-                if (correctAnswer == true) {
-                  print("Right");
-                } else {
-                  print("Wrong");
-                }
-                setState(() {
-                  questionNumber++;
-                });
+                checkAnswer(true);
               },
               child: Text(
                 "True",
@@ -101,15 +118,7 @@ class _QuizPageState extends State<QuizPage> {
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.red),
               onPressed: () {
-                bool correctAnswer = quizBrain.getCorrectAnswer(questionNumber);
-                if (correctAnswer == false) {
-                  print("Right");
-                } else {
-                  print("Wrong");
-                }
-                setState(() {
-                  questionNumber++;
-                });
+                checkAnswer(false);
               },
               child: Text(
                 "False",
