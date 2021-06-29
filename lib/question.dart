@@ -7,4 +7,3 @@ class Question {
     questionAnswer = a;
   }
 }
-

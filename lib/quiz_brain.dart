@@ -22,8 +22,6 @@ class QuizBrain {
     if (_questionNumber < _questionBank.length - 1) {
       _questionNumber++;
     }
-    print(_questionNumber);
-    print(_questionBank.length);
   }
 
   String getQuestionText() {
@@ -32,5 +30,18 @@ class QuizBrain {
 
   bool getCorrectAnswer() {
     return _questionBank[_questionNumber].questionAnswer;
+  }
+
+  bool isFinished() {
+    if (_questionNumber >= _questionBank.length - 1) {
+      print("Now returning type");
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void reset() {
+    _questionNumber = 0;
   }
 }
