@@ -1,7 +1,7 @@
 import 'package:quiz_app/question.dart';
 
 class QuizBrain {
-  List<Question> questionBank = [
+  List<Question> _questionBank = [
     Question(q: 'You are superhero', a: false),
     Question(q: 'you dont sleep', a: false),
     Question(q: 'you are cool', a: true),
@@ -15,4 +15,12 @@ class QuizBrain {
     Question(q: 'you dont slasdaseep', a: false),
     Question(q: 'you areadfg cool', a: true),
   ];
+
+  String getQuestionText(int questionNumber) {
+    return _questionBank[questionNumber].questionText;
+  }
+
+  bool getCorrectAnswer(int questionNumber) {
+    return _questionBank[questionNumber].questionAnswer;
+  }
 }
